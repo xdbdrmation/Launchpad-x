@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Rocket, Compass, Package, Activity, LogOut, Lightbulb } from 'lucide-react';
+import { PLACEHOLDER_DASHBOARD_STATS } from '../placeholders';
 import '../App.css';
 
 interface SidebarProps {
@@ -9,53 +10,50 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
   const menuItems = [
-    { id: 'launchbay',  icon: <Rocket  size={16} />, label: 'Launch Bay'  },
-    { id: 'missions',   icon: <Compass size={16} />, label: 'Missions'    },
-    { id: 'starters',   icon: <Lightbulb size={16} />, label: 'Starter Projects' },
-    { id: 'loadout',    icon: <Package size={16} />, label: 'Loadout'     },
-    { id: 'telemetry',  icon: <Activity size={16} />, label: 'Telemetry'   },
+    { id: 'launchbay',    icon: <Rocket    size={15} />, label: 'Launch Bay'   },
+    { id: 'missions',     icon: <Compass   size={15} />, label: 'Missions'     },
+    { id: 'starters',     icon: <Lightbulb size={15} />, label: 'Starters'     },
+    { id: 'loadout',      icon: <Package   size={15} />, label: 'Loadout'      },
+    { id: 'achievements', icon: <Activity  size={15} />, label: 'Achievements' },
   ];
+
+  // Missions Launched + MAYDAY Balance (indexes 0 & 1)
+  const sidebarStats = PLACEHOLDER_DASHBOARD_STATS.slice(0, 2);
 
   return (
     <aside className="sidebar" role="navigation" aria-label="Main navigation">
       <div className="sidebar-header">
-        <div className="sidebar-brand">
-          <div className="sidebar-brand-icon" aria-hidden="true">
-            <Rocket size={13} strokeWidth={2.5} />
-          </div>
-          <div className="sidebar-wordmark">
-            Launch<span>pad</span>
-            <div className="sidebar-affiliation-tag">Hack Club · YSWS</div>
-          </div>
-        </div>
+        <div className="sidebar-wordmark">MAYDAY</div>
+        <div className="sidebar-terminal-alpha">New Mexico</div>
       </div>
 
       <nav className="sidebar-nav">
-        <div className="sidebar-section-label">Navigation</div>
-        {menuItems.map((item, i) => (
+        {menuItems.map((item) => (
           <NavLink
             key={item.id}
             to={`/${item.id}`}
-            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-            aria-label={item.label}
-            title={item.label}
-            style={{ animationDelay: `${i * 40}ms` }}
+            className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
           >
             {item.icon}
-            <span className="nav-label">{item.label}</span>
+            <span>{item.label}</span>
           </NavLink>
         ))}
       </nav>
 
+      {/* User stats pinned above logout */}
+      <div className="sidebar-stats">
+        {sidebarStats.map((s) => (
+          <div key={s.label} className="sidebar-stat-item">
+            <span className="sidebar-stat-label">{s.label}</span>
+            <span className="sidebar-stat-value">{s.value}</span>
+          </div>
+        ))}
+      </div>
+
       <div className="sidebar-footer">
-        <button
-          className="nav-item-logout"
-          onClick={onLogout}
-          aria-label="Abort mission / sign out"
-          title="Sign out"
-        >
-          <LogOut size={15} />
-          <span className="nav-label">Abort Mission</span>
+        <button onClick={onLogout} className="nav-item-logout">
+          <LogOut size={14} />
+          <span>Sign out</span>
         </button>
       </div>
     </aside>

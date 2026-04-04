@@ -24,7 +24,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
     missions:   { icon: <Compass  size={13} />, label: 'Missions'    },
     starters:   { icon: <Lightbulb size={13} />, label: 'Starter Projects' },
     loadout:    { icon: <Package  size={13} />, label: 'Loadout'     },
-    telemetry:  { icon: <Activity size={13} />, label: 'Telemetry'   },
+    achievements: { icon: <Activity size={13} />, label: 'Achievements' },
   };
 
   const currentMeta = viewMeta[pathSegment] || viewMeta.launchbay;
@@ -35,19 +35,18 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
 
       <main className="dashboard-content">
         <div className="content-container">
-          <div className="breadcrumb-trail">
-            <span>Launchpad</span>
-            <span className="breadcrumb-sep">/</span>
-            <span className="breadcrumb-active">
-              {currentMeta.icon}
-              {currentMeta.label}
-            </span>
+          <div className="gc-breadcrumb">
+            <span style={{ color: 'var(--text-dim)' }}>MAYDAY</span>
+            <span style={{ color: 'var(--text-dim)' }}>/</span>
+            <span style={{ color: 'var(--amber)' }}>{currentMeta.label}</span>
           </div>
 
+
           {pathSegment === 'launchbay' && (
-            <div className="stats-bar">
-              {stats.map((s, i) => (
-                <div key={i} className="stat-card">
+            <div className="gc-stat-bar">
+              {/* Missions Launched + MAYDAY Balance live in the sidebar */}
+              {stats.slice(2).map((s, i) => (
+                <div key={i} className="gc-stat-card">
                   <div className="stat-label">{s.label}</div>
                   <div className={`stat-value ${s.cls}`}>{s.value}</div>
                 </div>
