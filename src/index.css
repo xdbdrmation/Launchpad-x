@@ -1,74 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&family=Alfa+Slab+One&display=swap');
 
 :root {
-  /* ── Core Palette ── */
-  --amber: #E8700A;
-  --amber-light: #FF8C30;
-  --amber-dim: #A35008;
-  --phosphor: #00E5A0;
-  --phosphor-dim: #00A872;
-  --cyan: #00D4F5;
-  --red-alert: #FF4444;
+  /* ──── TERMINAL ALPHA COLOR INDEX ──── */
+  /* Hex codes for cross-component consistency */
+  --color-amber: #E8700A;          /* Industrial Orange (Buttons/Accent) */
+  --color-amber-light: #FF8C30;    /* Hover State / Highlights */
+  --color-amber-dim: #A35008;      /* Borders / Subtle UI Decoration */
+  
+  --color-phosphor: #00E5A0;       /* Launch Success / Mint Green */
+  --color-phosphor-dim: #00A872;
+  
+  --color-void: #030508;           /* Navigation/Sidebar Deep Background */
+  --color-page: #060A10;           /* Main Background */
+  --color-panel: #0D1520;          /* Module / Card Surface */
+  --color-elevated: #141E2E;       /* Elevated Overlays */
+  
+  --color-text-bright: #D8E4F0;    /* Primary Content Text */
+  --color-text-dim: #7A90A8;       /* Secondary / Descriptive Text */
+  --color-text-ghost: #3E5268;     /* Inactive / Decorator Text */
+  
+  --color-alert-red: #FF4444;      /* Warnings / Critical Status */
+  --color-border-hard: #000000;    /* High-contrast Industrial Borders */
 
-  /* ── Surfaces — void-to-panel progression ── */
-  --bg-void: #030508;
-  --bg-page: #060a10;
-  --bg-panel: #090e16;
-  --bg-card: #0d1520;
-  --bg-card-hover: #111d2c;
-  --bg-elevated: #141e2e;
+  /* ── Functional Aliases (Applied across system) ── */
+  --amber: var(--color-amber);
+  --amber-light: var(--color-amber-light);
+  --amber-dim: var(--color-amber-dim);
+  --phosphor: var(--color-phosphor);
+  --phosphor-dim: var(--color-phosphor-dim);
+  --cyan: #00D4F5;
+  --red-alert: var(--color-alert-red);
+
+  --bg-void: var(--color-void);
+  --bg-page: var(--color-page);
+  --bg-panel: var(--color-panel);
+  --bg-card: var(--color-panel);
+  --bg-card-hover: var(--color-elevated);
+  --bg-elevated: var(--color-elevated);
   --bg-input: #0a1019;
 
-  /* ── Borders ── */
-  --border-faint: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-card: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --border-amber: rgba(232, 112, 10, 0.35);
+  --text-primary: var(--color-text-bright);
+  --text-secondary: var(--color-text-dim);
+  --text-dim: var(--color-text-ghost);
+  --text-amber: var(--color-amber-light);
+  --text-phosphor: var(--color-phosphor);
 
-  /* ── Text ── */
-  --text-primary: #D8E4F0;
-  --text-secondary: #7A90A8;
-  --text-dim: #3E5268;
-  --text-amber: var(--amber-light);
-  --text-phosphor: var(--phosphor);
-
-  /* Legacy aliases so existing components don't break */
+  /* Legacy references mapped to new index */
   --text-main: var(--text-primary);
   --text-muted: var(--text-secondary);
   --text-light: var(--text-dim);
   --text-white: #ffffff;
   --text-accent: var(--amber);
-
-  --hc-red: var(--amber);
-  --hc-red-light: var(--amber-light);
-  --hc-red-dark: var(--amber-dim);
-  --hc-orange: #F59E0B;
-  --hc-yellow: #FBBF24;
-  --hc-green: var(--phosphor);
-  --hc-cyan: var(--cyan);
-  --hc-blue: #38BDF8;
-  --hc-purple: #A78BFA;
-  --hc-dark: var(--bg-panel);
-  --hc-darker: var(--bg-page);
-  --hc-darkest: var(--bg-void);
-
-  --lp-orange: var(--amber);
-  --lp-orange-light: var(--amber-light);
-  --lp-orange-dark: var(--amber-dim);
-  --lp-green: var(--phosphor);
-  --lp-blue: var(--cyan);
-  --lp-purple: #A78BFA;
-
-  --bg-page: var(--bg-page);
-  --bg-white: var(--bg-card);
-  --bg-subtle: var(--bg-elevated);
-  --bg-surface: var(--bg-elevated);
-  --bg-sidebar: var(--bg-panel);
-
-  --border-subtle: var(--border-subtle);
-  --border-card: var(--border-card);
-  --border-strong: var(--border-strong);
 
   /* ── Typography ── */
   --font-display: 'Orbitron', 'Helvetica Neue', sans-serif;
@@ -104,6 +86,11 @@
   --transition-fast: all 120ms ease;
   --transition-base: all 200ms ease;
   --transition-slow: all 350ms ease;
+
+  /* ── Ground Control Accents ── */
+  --gc-cream: #F2F0E6;
+  --gc-shadow: rgba(0, 0, 0, 0.45);
+  --gc-border: 2px solid #000;
 }
 
 /* ── Page-level grid texture ── */
@@ -120,10 +107,13 @@ html {
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-page);
-  background-image:
-    linear-gradient(rgba(232, 112, 10, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232, 112, 10, 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 22px,
+    rgba(255, 255, 255, 0.012) 22px,
+    rgba(255, 255, 255, 0.012) 23px
+  );
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -188,9 +178,9 @@ textarea,
 select {
   font-family: var(--font-mono);
   background: var(--bg-input);
-  border: 1px solid var(--border-card);
-  padding: 0.625rem 0.875rem;
-  border-radius: var(--radius-md);
+  border: 2px solid #000;
+  padding: 0.8rem 1rem;
+  border-radius: 0;
   font-size: var(--fs-small);
   color: var(--text-primary);
   transition: var(--transition-fast);
