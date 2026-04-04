@@ -230,7 +230,7 @@
 }
 
 .stat-value.stat-open {
-  color: var(--phosphor);
+  color: var(--amber);
 }
 
 .stat-label {
